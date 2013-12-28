@@ -15,11 +15,11 @@ use yii\validators\Validator;
  * <code>
  * ['dueDate', ConditionalValidator::className(),
  *      'if' => [
- *          ['id_payment_method', 'in', 'range' => [PaymentMethod::MONEY, PaymentMethod::CARD], 'allowEmpty' => false]
+ *          [['id_payment_method'], 'in', 'range' => [PaymentMethod::MONEY, PaymentMethod::CARD], 'allowEmpty' => false]
  *      ],
  *      'then' => [
- *          ['dueDate', 'required'],
- *          ['dueDate', 'numerical']
+ *          [['dueDate'], 'required'],
+ *          [['dueDate'], 'numerical']
  *      ]
  * ]
  * </code>
@@ -27,7 +27,7 @@ use yii\validators\Validator;
  * This validator is inspired by {@link https://github.com/sidtj/Yii-Conditional-Validator}.
  *
  * @license https://github.com/kop/Yii2-Conditional-Validator/blob/master/LICENSE.md MIT
- * @link https://github.com/kop/yii2-conditional-validator GitHub Repository
+ * @link http://kop.github.io/yii2-conditional-validator Project page
  * @author  Ivan Koptiev <ikoptev@gmail.com>
  * @version 0.1
  */
@@ -51,7 +51,8 @@ class ConditionalValidator extends Validator
         // Validate given conditions
         foreach (['if', 'then'] as $attribute) {
             if (!is_array($this->$attribute)) {
-                throw new InvalidConfigException("Invalid argument \"{$attribute}\" for ConditionalValidator. Please, supply an array.");
+                $className = self::className();
+                throw new InvalidConfigException("Invalid argument \"{$attribute}\" for \"{$className}\". Please, supply an array.");
             }
         }
     }
@@ -72,7 +73,6 @@ class ConditionalValidator extends Validator
 
         // Apply "Then" condition
         if (!$internalObject->hasErrors()) {
-
             $thenValidators = $this->createValidators($object, $this->then);
             foreach ($thenValidators as $validator) {
                 $validator->validateAttributes($object, $attributes);
@@ -102,6 +102,7 @@ class ConditionalValidator extends Validator
                 throw new InvalidConfigException('Invalid validation rule: a rule must specify both attribute names and validator type.');
             }
         }
+
         return $validators;
     }
 }
