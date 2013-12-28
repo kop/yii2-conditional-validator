@@ -42,18 +42,28 @@ Basically, Y2CV executes the rules set in the param <code>if</code> and if there
 <h2>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
+<h3>
+<a name="composer-recommended" class="anchor" href="#composer-recommended"><span class="octicon octicon-link"></span></a>Composer (recommended)</h3>
+
 <p>Describe composer here.</p>
 
-<h2>
-<a name="usage-examples" class="anchor" href="#usage-examples"><span class="octicon octicon-link"></span></a>Usage Examples</h2>
+<h3>
+<a name="manual-installation" class="anchor" href="#manual-installation"><span class="octicon octicon-link"></span></a>Manual installation</h3>
 
-<div class="highlight highlight-php"><pre><span class="p">[</span><span class="s1">'safeAttribsList'</span><span class="p">,</span> <span class="nx">ConditionalValidator</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span>
+<p>Download latest version in <a href="https://github.com/kop/yii2-conditional-validator/zipball/master">zip</a>
+or <a href="https://github.com/kop/yii2-conditional-validator/tarball/master">tar.gz</a> archive,
+extract ConditionalValidator.php file to the place you like and adjust class namespace, to let Yii autoload it.</p>
+
+<h2>
+<a name="syntax-example" class="anchor" href="#syntax-example"><span class="octicon octicon-link"></span></a>Syntax Example</h2>
+
+<div class="highlight highlight-php"><pre><span class="p">[[</span><span class="s1">'safeAttributes'</span><span class="p">],</span> <span class="sb">`path.to.ConditionalValidator`</span><span class="p">,</span>
     <span class="s1">'if'</span> <span class="o">=&gt;</span> <span class="p">[</span>
-        <span class="c1">// rule1: ['attrX, attrY', 'required', ... ]</span>
+        <span class="c1">// rule1: [['attrX', 'attrY'], 'required', ... ]</span>
         <span class="c1">// ruleN: ...</span>
     <span class="p">],</span>
     <span class="s1">'then'</span> <span class="o">=&gt;</span> <span class="p">[</span>
-        <span class="c1">// rule1: ['attrZ, attrG', 'required', ... ]</span>
+        <span class="c1">// rule1: [['attrZ', 'attrG'], 'required', ... ]</span>
         <span class="c1">// ruleN: ...</span>
     <span class="p">]</span>
 <span class="p">]</span>
@@ -61,35 +71,35 @@ Basically, Y2CV executes the rules set in the param <code>if</code> and if there
 
 <ul>
 <li>
-<code>safeAttribsList</code>: The name of the attributes that should be turned safe (since Yii has no way to make dinamic validators to turn attributes safe);</li>
+<code>safeAttributes</code>: The name of the attributes that should be turned safe (since Yii has no way to make dynamic validators to turn attributes safe);</li>
 <li>
-<code>path.to.YiiConditionalValidator</code>: In the most of cases will be <code>ext.YiiConditionalValidator</code>;</li>
+<code>path.to.ConditionalValidator</code>: In the most of cases will be <code>ConditionalValidator::className()</code>;</li>
 <li>
 <code>if</code>: (bidimensional array) The conditional rules to be validated. <em>Only</em> if they are all valid (i.e., have no errors) then the rules in <code>then</code> will be validated;</li>
 <li>
-<code>then</code>: (bidimensional array) The rules that will be validated <em>only</em> if there are no errors in rules of <code>if</code> param;</li>
+<code>then</code>: (bidimensional array) The rules that will be validated <em>only</em> if there are no errors in rules of <code>if</code> param.</li>
 </ul><blockquote>
 <p>Note:
 Errors in the rules set in the param <code>if</code> are discarded after checking. Only errors in the rules set in param <code>then</code> are really kept.</p>
 </blockquote>
 
 <h2>
-<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h2>
+<a name="usage-examples" class="anchor" href="#usage-examples"><span class="octicon octicon-link"></span></a>Usage Examples</h2>
 
 <p><code>If</code> <em>customer_type</em> is "active" <code>then</code> <em>birthdate</em> and <em>city</em> are <code>required</code>:</p>
 
 <div class="highlight highlight-php"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">rules</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="k">return</span> <span class="k">array</span><span class="p">(</span>
-        <span class="k">array</span><span class="p">(</span><span class="s1">'customer_type'</span><span class="p">,</span> <span class="s1">'ext.YiiConditionalValidator'</span><span class="p">,</span>
-            <span class="s1">'if'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-                <span class="k">array</span><span class="p">(</span><span class="s1">'customer_type'</span><span class="p">,</span> <span class="s1">'compare'</span><span class="p">,</span> <span class="s1">'compareValue'</span><span class="o">=&gt;</span><span class="s2">"active"</span><span class="p">),</span>
-            <span class="p">),</span>
-            <span class="s1">'then'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-                <span class="k">array</span><span class="p">(</span><span class="s1">'birthdate, city'</span><span class="p">,</span> <span class="s1">'required'</span><span class="p">),</span>
-            <span class="p">),</span>
-        <span class="p">),</span>
-    <span class="p">);</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="p">[[</span><span class="s1">'customer_type'</span><span class="p">],</span> <span class="nx">ConditionalValidator</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span>
+            <span class="s1">'if'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="p">[[</span><span class="s1">'customer_type'</span><span class="p">],</span> <span class="s1">'compare'</span><span class="p">,</span> <span class="s1">'compareValue'</span> <span class="o">=&gt;</span> <span class="s1">'active'</span><span class="p">]</span>
+            <span class="p">],</span>
+            <span class="s1">'then'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="p">[[</span><span class="s1">'birthdate'</span><span class="p">,</span> <span class="s1">'city'</span><span class="p">],</span> <span class="s1">'required'</span><span class="p">]</span>
+            <span class="p">]</span>
+        <span class="p">]</span>
+    <span class="p">];</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -97,17 +107,17 @@ Errors in the rules set in the param <code>if</code> are discarded after checkin
 
 <div class="highlight highlight-php"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">rules</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="k">return</span> <span class="k">array</span><span class="p">(</span>
-        <span class="k">array</span><span class="p">(</span><span class="s1">'customer_type'</span><span class="p">,</span> <span class="s1">'ext.YiiConditionalValidator'</span><span class="p">,</span>
-            <span class="s1">'if'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-                <span class="k">array</span><span class="p">(</span><span class="s1">'customer_type'</span><span class="p">,</span> <span class="s1">'compare'</span><span class="p">,</span> <span class="s1">'compareValue'</span><span class="o">=&gt;</span><span class="s2">"active"</span><span class="p">),</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="p">[[</span><span class="s1">'customer_type'</span><span class="p">],</span> <span class="nx">ConditionalValidator</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span>
+            <span class="s1">'if'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="p">[[</span><span class="s1">'customer_type'</span><span class="p">],</span> <span class="s1">'compare'</span><span class="p">,</span> <span class="s1">'compareValue'</span> <span class="o">=&gt;</span> <span class="s1">'active'</span><span class="p">]</span>
             <span class="p">),</span>
-            <span class="s1">'then'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-                <span class="k">array</span><span class="p">(</span><span class="s1">'birthdate, city'</span><span class="p">,</span> <span class="s1">'required'</span><span class="p">),</span>
-                <span class="k">array</span><span class="p">(</span><span class="s1">'city'</span><span class="p">,</span> <span class="s1">'in'</span><span class="p">,</span> <span class="s1">'range'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s2">"sao_paulo"</span><span class="p">,</span> <span class="s2">"sumare"</span><span class="p">,</span> <span class="s2">"jacarezinho"</span><span class="p">)),</span>
-            <span class="p">),</span>
-        <span class="p">),</span>
-    <span class="p">);</span>
+            <span class="s1">'then'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="p">[[</span><span class="s1">'birthdate'</span><span class="p">,</span> <span class="s1">'city'</span><span class="p">],</span> <span class="s1">'required'</span><span class="p">],</span>
+                <span class="p">[[</span><span class="s1">'city'</span><span class="p">],</span> <span class="s1">'in'</span><span class="p">,</span> <span class="s1">'range'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'sao_paulo'</span><span class="p">,</span> <span class="s1">'sumare'</span><span class="p">,</span> <span class="s1">'jacarezinho'</span><span class="p">]]</span>
+            <span class="p">]</span>
+        <span class="p">]</span>
+    <span class="p">];</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -115,17 +125,17 @@ Errors in the rules set in the param <code>if</code> are discarded after checkin
 
 <div class="highlight highlight-php"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">rules</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="k">return</span> <span class="k">array</span><span class="p">(</span>
-        <span class="k">array</span><span class="p">(</span><span class="s1">'information'</span><span class="p">,</span> <span class="s1">'ext.YiiConditionalValidator'</span><span class="p">,</span>
-            <span class="s1">'if'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-                <span class="k">array</span><span class="p">(</span><span class="s1">'information'</span><span class="p">,</span> <span class="s1">'match'</span><span class="p">,</span> <span class="s1">'pattern'</span><span class="o">=&gt;</span><span class="s1">'/^http:\/\//'</span><span class="p">),</span>
-                <span class="k">array</span><span class="p">(</span><span class="s1">'information'</span><span class="p">,</span> <span class="s1">'length'</span><span class="p">,</span> <span class="s1">'min'</span><span class="o">=&gt;</span><span class="mi">24</span><span class="p">,</span> <span class="s1">'allowEmpty'</span><span class="o">=&gt;</span><span class="k">false</span><span class="p">),</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="p">[[</span><span class="s1">'information'</span><span class="p">],</span> <span class="nx">ConditionalValidator</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span>
+            <span class="s1">'if'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="p">[[</span><span class="s1">'information'</span><span class="p">],</span> <span class="s1">'match'</span><span class="p">,</span> <span class="s1">'pattern'</span> <span class="o">=&gt;</span> <span class="s1">'/^http:\/\//'</span><span class="p">],</span>
+                <span class="p">[[</span><span class="s1">'information'</span><span class="p">],</span> <span class="s1">'string'</span><span class="p">,</span> <span class="s1">'min'</span> <span class="o">=&gt;</span> <span class="mi">24</span><span class="p">,</span> <span class="s1">'allowEmpty'</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">]</span>
             <span class="p">),</span>
-            <span class="s1">'then'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-                <span class="k">array</span><span class="p">(</span><span class="s1">'information'</span><span class="p">,</span> <span class="s1">'url'</span><span class="p">),</span>
-            <span class="p">),</span>
-        <span class="p">),</span>
-    <span class="p">);</span>
+            <span class="s1">'then'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="p">[[</span><span class="s1">'information'</span><span class="p">],</span> <span class="s1">'url'</span><span class="p">]</span>
+            <span class="p">]</span>
+        <span class="p">]</span>
+    <span class="p">];</span>
 <span class="p">}</span>
 </pre></div>
       </section>
