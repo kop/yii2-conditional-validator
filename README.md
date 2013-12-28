@@ -17,7 +17,7 @@ Describe composer here.
 
 Download latest version in [zip](https://github.com/kop/yii2-conditional-validator/zipball/master)
 or [tar.gz](https://github.com/kop/yii2-conditional-validator/tarball/master) archive,
-extract ConditionalValidator.php file to the place you like and adjust class namespace, to let Yii autoload it.
+extract `ConditionalValidator.php` file to the place you like and adjust class namespace, to let Yii autoload it.
 
 
 ## Syntax Example

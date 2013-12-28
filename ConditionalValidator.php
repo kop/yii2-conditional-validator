@@ -1,6 +1,6 @@
 <?php
 
-namespace kop\validators;
+namespace kop\y2cv;
 
 use yii\base\InvalidConfigException;
 use yii\validators\Validator;
@@ -28,6 +28,7 @@ use yii\validators\Validator;
  *
  * @license https://github.com/kop/Yii2-Conditional-Validator/blob/master/LICENSE.md MIT
  * @link http://kop.github.io/yii2-conditional-validator Project page
+ *
  * @author  Ivan Koptiev <ikoptev@gmail.com>
  * @version 0.1
  */
