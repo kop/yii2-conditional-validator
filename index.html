@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Yii2-conditional-validator : If-then validation rules on Yii2 Framework using core validators" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Yii2-conditional-validator</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/kop/yii2-conditional-validator">View on GitHub</a>
+
+          <h1 id="project_title">Yii2-conditional-validator</h1>
+          <h2 id="project_tagline">If-then validation rules on Yii2 Framework using core validators</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/kop/yii2-conditional-validator/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/kop/yii2-conditional-validator/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="yii2-conditional-validator" class="anchor" href="#yii2-conditional-validator"><span class="octicon octicon-link"></span></a>Yii2 Conditional Validator</h1>
+
+<p>Yii2 Conditional Validator (Y2CV) validates some attributes depending on certain conditions (rules).
+You can use any core validator as you usually would do or any other class based or inline validator.
+An interesting feature is that you can even use the own Y2CV inside itself to perform more complex conditions.
+Basically, Y2CV executes the rules set in the param <code>if</code> and if there are no errors executes the rules set in the param <code>then</code>.</p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Describe composer here.</p>
+
+<h2>
+<a name="usage-examples" class="anchor" href="#usage-examples"><span class="octicon octicon-link"></span></a>Usage Examples</h2>
+
+<div class="highlight highlight-php"><pre><span class="p">[</span><span class="s1">'safeAttribsList'</span><span class="p">,</span> <span class="nx">ConditionalValidator</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span>
+    <span class="s1">'if'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="c1">// rule1: ['attrX, attrY', 'required', ... ]</span>
+        <span class="c1">// ruleN: ...</span>
+    <span class="p">],</span>
+    <span class="s1">'then'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="c1">// rule1: ['attrZ, attrG', 'required', ... ]</span>
+        <span class="c1">// ruleN: ...</span>
+    <span class="p">]</span>
+<span class="p">]</span>
+</pre></div>
+
+<ul>
+<li>
+<code>safeAttribsList</code>: The name of the attributes that should be turned safe (since Yii has no way to make dinamic validators to turn attributes safe);</li>
+<li>
+<code>path.to.YiiConditionalValidator</code>: In the most of cases will be <code>ext.YiiConditionalValidator</code>;</li>
+<li>
+<code>if</code>: (bidimensional array) The conditional rules to be validated. <em>Only</em> if they are all valid (i.e., have no errors) then the rules in <code>then</code> will be validated;</li>
+<li>
+<code>then</code>: (bidimensional array) The rules that will be validated <em>only</em> if there are no errors in rules of <code>if</code> param;</li>
+</ul><blockquote>
+<p>Note:
+Errors in the rules set in the param <code>if</code> are discarded after checking. Only errors in the rules set in param <code>then</code> are really kept.</p>
+</blockquote>
+
+<h2>
+<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h2>
+
+<p><code>If</code> <em>customer_type</em> is "active" <code>then</code> <em>birthdate</em> and <em>city</em> are <code>required</code>:</p>
+
+<div class="highlight highlight-php"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">rules</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+        <span class="k">array</span><span class="p">(</span><span class="s1">'customer_type'</span><span class="p">,</span> <span class="s1">'ext.YiiConditionalValidator'</span><span class="p">,</span>
+            <span class="s1">'if'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="k">array</span><span class="p">(</span><span class="s1">'customer_type'</span><span class="p">,</span> <span class="s1">'compare'</span><span class="p">,</span> <span class="s1">'compareValue'</span><span class="o">=&gt;</span><span class="s2">"active"</span><span class="p">),</span>
+            <span class="p">),</span>
+            <span class="s1">'then'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="k">array</span><span class="p">(</span><span class="s1">'birthdate, city'</span><span class="p">,</span> <span class="s1">'required'</span><span class="p">),</span>
+            <span class="p">),</span>
+        <span class="p">),</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<p><code>If</code> <em>customer_type</em> is "inactive" <code>then</code> <em>birthdate</em> and <em>city</em> are <code>required</code> <strong>and</strong> <em>city</em> must be "sao_paulo", "sumare" or "jacarezinho":</p>
+
+<div class="highlight highlight-php"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">rules</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+        <span class="k">array</span><span class="p">(</span><span class="s1">'customer_type'</span><span class="p">,</span> <span class="s1">'ext.YiiConditionalValidator'</span><span class="p">,</span>
+            <span class="s1">'if'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="k">array</span><span class="p">(</span><span class="s1">'customer_type'</span><span class="p">,</span> <span class="s1">'compare'</span><span class="p">,</span> <span class="s1">'compareValue'</span><span class="o">=&gt;</span><span class="s2">"active"</span><span class="p">),</span>
+            <span class="p">),</span>
+            <span class="s1">'then'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="k">array</span><span class="p">(</span><span class="s1">'birthdate, city'</span><span class="p">,</span> <span class="s1">'required'</span><span class="p">),</span>
+                <span class="k">array</span><span class="p">(</span><span class="s1">'city'</span><span class="p">,</span> <span class="s1">'in'</span><span class="p">,</span> <span class="s1">'range'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s2">"sao_paulo"</span><span class="p">,</span> <span class="s2">"sumare"</span><span class="p">,</span> <span class="s2">"jacarezinho"</span><span class="p">)),</span>
+            <span class="p">),</span>
+        <span class="p">),</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<p><code>If</code> <em>information</em> starts with 'http://' <strong>and</strong> has at least 24 chars length <code>then</code> the own <em>information</em> must be a valid url:</p>
+
+<div class="highlight highlight-php"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">rules</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+        <span class="k">array</span><span class="p">(</span><span class="s1">'information'</span><span class="p">,</span> <span class="s1">'ext.YiiConditionalValidator'</span><span class="p">,</span>
+            <span class="s1">'if'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="k">array</span><span class="p">(</span><span class="s1">'information'</span><span class="p">,</span> <span class="s1">'match'</span><span class="p">,</span> <span class="s1">'pattern'</span><span class="o">=&gt;</span><span class="s1">'/^http:\/\//'</span><span class="p">),</span>
+                <span class="k">array</span><span class="p">(</span><span class="s1">'information'</span><span class="p">,</span> <span class="s1">'length'</span><span class="p">,</span> <span class="s1">'min'</span><span class="o">=&gt;</span><span class="mi">24</span><span class="p">,</span> <span class="s1">'allowEmpty'</span><span class="o">=&gt;</span><span class="k">false</span><span class="p">),</span>
+            <span class="p">),</span>
+            <span class="s1">'then'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="k">array</span><span class="p">(</span><span class="s1">'information'</span><span class="p">,</span> <span class="s1">'url'</span><span class="p">),</span>
+            <span class="p">),</span>
+        <span class="p">),</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Yii2-conditional-validator maintained by <a href="https://github.com/kop">kop</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
