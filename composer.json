@@ -12,10 +12,12 @@
     "authors": [
         {
             "name": "Ivan Koptiev",
-            "email": "ikoptev@gmail.com"
+            "email": "ikoptev@gmail.com",
+            "role": "Developer"
         }
     ],
     "require": {
+        "php": ">=5.4.0",
         "yiisoft/yii2": "*"
     },
     "autoload": {
