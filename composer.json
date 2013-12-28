@@ -1,0 +1,27 @@
+{
+    "name": "kop/yii2-conditional-validator",
+    "description": "If-then validation rules for Yii2 Framework",
+    "homepage": "http://kop.github.io/yii2-conditional-validator/",
+    "keywords": ["yii", "yii2", "validator", "validation", "conditional"],
+    "type": "yii2-extension",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/kop/yii2-conditional-validator/issues",
+        "source": "https://github.com/kop/yii2-conditional-validator"
+    },
+    "authors": [
+        {
+            "name": "Ivan Koptiev",
+            "email": "ikoptev@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "kop\\y2cv\\": ""
+        }
+    },
+    "target-dir": "kop/y2cv"
+}
