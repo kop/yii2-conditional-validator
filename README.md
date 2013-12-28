@@ -9,49 +9,57 @@ Basically, Y2CV executes the rules set in the param `if` and if there are no err
 
 ## Installation
 
+### Composer (recommended)
+
 Describe composer here.
 
+### Manual installation
 
-## Usage Examples
+Download latest version in [zip](https://github.com/kop/yii2-conditional-validator/zipball/master)
+or [tar.gz](https://github.com/kop/yii2-conditional-validator/tarball/master) archive,
+extract ConditionalValidator.php file to the place you like and adjust class namespace, to let Yii autoload it.
+
+
+## Syntax Example
 
 ```php
-['safeAttribsList', ConditionalValidator::className(),
+[['safeAttributes'], `path.to.ConditionalValidator`,
     'if' => [
-        // rule1: ['attrX, attrY', 'required', ... ]
+        // rule1: [['attrX', 'attrY'], 'required', ... ]
         // ruleN: ...
     ],
     'then' => [
-        // rule1: ['attrZ, attrG', 'required', ... ]
+        // rule1: [['attrZ', 'attrG'], 'required', ... ]
         // ruleN: ...
     ]
 ]
 ```
 
-- `safeAttribsList`: The name of the attributes that should be turned safe (since Yii has no way to make dinamic validators to turn attributes safe);
-- `path.to.YiiConditionalValidator`: In the most of cases will be `ext.YiiConditionalValidator`;
+- `safeAttributes`: The name of the attributes that should be turned safe (since Yii has no way to make dynamic validators to turn attributes safe);
+- `path.to.ConditionalValidator`: In the most of cases will be `ConditionalValidator::className()`;
 - `if`: (bidimensional array) The conditional rules to be validated. *Only* if they are all valid (i.e., have no errors) then the rules in `then` will be validated;
-- `then`: (bidimensional array) The rules that will be validated *only* if there are no errors in rules of `if` param;
+- `then`: (bidimensional array) The rules that will be validated *only* if there are no errors in rules of `if` param.
 
 > Note:
 Errors in the rules set in the param `if` are discarded after checking. Only errors in the rules set in param `then` are really kept.
 
 
-## Examples
+## Usage Examples
 
 `If` *customer_type* is "active" `then` *birthdate* and *city* are `required`:
 ```php
 public function rules()
 {
-    return array(
-        array('customer_type', 'ext.YiiConditionalValidator',
-            'if' => array(
-                array('customer_type', 'compare', 'compareValue'=>"active"),
-            ),
-            'then' => array(
-                array('birthdate, city', 'required'),
-            ),
-        ),
-    );
+    return [
+        [['customer_type'], ConditionalValidator::className(),
+            'if' => [
+                [['customer_type'], 'compare', 'compareValue' => 'active']
+            ],
+            'then' => [
+                [['birthdate', 'city'], 'required']
+            ]
+        ]
+    ];
 }
 ```
 
@@ -59,17 +67,17 @@ public function rules()
 ```php
 public function rules()
 {
-    return array(
-        array('customer_type', 'ext.YiiConditionalValidator',
-            'if' => array(
-                array('customer_type', 'compare', 'compareValue'=>"active"),
+    return [
+        [['customer_type'], ConditionalValidator::className(),
+            'if' => [
+                [['customer_type'], 'compare', 'compareValue' => 'active']
             ),
-            'then' => array(
-                array('birthdate, city', 'required'),
-                array('city', 'in', 'range' => array("sao_paulo", "sumare", "jacarezinho")),
-            ),
-        ),
-    );
+            'then' => [
+                [['birthdate', 'city'], 'required'],
+                [['city'], 'in', 'range' => ['sao_paulo', 'sumare', 'jacarezinho']]
+            ]
+        ]
+    ];
 }
 ```
 
@@ -77,16 +85,16 @@ public function rules()
 ```php
 public function rules()
 {
-    return array(
-        array('information', 'ext.YiiConditionalValidator',
-            'if' => array(
-                array('information', 'match', 'pattern'=>'/^http:\/\//'),
-                array('information', 'length', 'min'=>24, 'allowEmpty'=>false),
+    return [
+        [['information'], ConditionalValidator::className(),
+            'if' => [
+                [['information'], 'match', 'pattern' => '/^http:\/\//'],
+                [['information'], 'string', 'min' => 24, 'allowEmpty' => false]
             ),
-            'then' => array(
-                array('information', 'url'),
-            ),
-        ),
-    );
+            'then' => [
+                [['information'], 'url']
+            ]
+        ]
+    ];
 }
 ```
