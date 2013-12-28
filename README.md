@@ -9,9 +9,21 @@ Basically, Y2CV executes the rules set in the param `if` and if there are no err
 
 ## Installation
 
-### Composer (recommended)
 
-Describe composer here.
+### Composer
+
+The preferred way to install this extension is through [Composer](http://getcomposer.org/).
+
+Either run
+
+``` php composer.phar require kop/yii2-conditional-validator "dev-master" ```
+
+or add
+
+``` "kop/yii2-conditional-validator": "dev-master"```
+
+to the require section of your composer.json
+
 
 ### Manual installation
 
