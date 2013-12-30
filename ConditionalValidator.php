@@ -27,7 +27,7 @@ use yii\validators\Validator;
  * This validator is inspired by {@link https://github.com/sidtj/Yii-Conditional-Validator}.
  *
  * @license https://github.com/kop/Yii2-Conditional-Validator/blob/master/LICENSE.md MIT
- * @link http://kop.github.io/yii2-conditional-validator Project page
+ * @link    http://kop.github.io/yii2-conditional-validator Project page
  *
  * @author  Ivan Koptiev <ikoptev@gmail.com>
  * @version 0.1
@@ -45,10 +45,17 @@ class ConditionalValidator extends Validator
     public $then = [];
 
     /**
+     * @var boolean $skipOnEmpty Whether this validation rule should be skipped if the attribute value is null or an empty string.
+     */
+    public $skipOnEmpty = false;
+
+    /**
      * @inheritdoc
      */
     public function init()
     {
+        parent::init();
+
         // Validate given conditions
         foreach (['if', 'then'] as $attribute) {
             if (!is_array($this->$attribute)) {
