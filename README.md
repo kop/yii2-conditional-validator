@@ -7,10 +7,18 @@ An interesting feature is that you can even use the own Y2CV inside itself to pe
 Basically, Y2CV executes the rules set in the param `if` and if there are no errors executes the rules set in the param `then`.
 
 
+## Requirements
+
+- Yii 2.0 (dev-master)
+- PHP 5.4
+
+> Note:
+This extension mandatorily requires [Yii Framework 2](https://github.com/yiisoft/yii2).
+The framework is under active development and the first stable release of Yii 2 is expected in early 2014.
+
+
 ## Installation
 
-
-### Composer
 
 The preferred way to install this extension is through [Composer](http://getcomposer.org/).
 
@@ -22,14 +30,7 @@ or add
 
 ``` "kop/yii2-conditional-validator": "dev-master"```
 
-to the require section of your composer.json
-
-
-### Manual installation
-
-Download latest version in [zip](https://github.com/kop/yii2-conditional-validator/zipball/master)
-or [tar.gz](https://github.com/kop/yii2-conditional-validator/tarball/master) archive,
-extract `ConditionalValidator.php` file to the place you like and adjust class namespace, to let Yii autoload it.
+to the `require` section of your `composer.json` file.
 
 
 ## Syntax Example
@@ -110,3 +111,20 @@ public function rules()
     ];
 }
 ```
+
+
+## Report
+
+- Report any issues [on the GitHub](https://github.com/kop/yii2-conditional-validator/issues).
+
+
+## License
+
+**yii2-conditional-validator** is released under the MIT License. See the bundled `LICENSE.md` for details.
+
+
+## Resources
+
+- [Project Page](http://kop.github.io/yii2-conditional-validator)
+- [Packagist Package](https://packagist.org/packages/kop/yii2-conditional-validator)
+- [Source Code](https://github.com/kop/yii2-conditional-validator)
