@@ -40,10 +40,19 @@ An interesting feature is that you can even use the own Y2CV inside itself to pe
 Basically, Y2CV executes the rules set in the param <code>if</code> and if there are no errors executes the rules set in the param <code>then</code>.</p>
 
 <h2>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
 
-<h3>
-<a name="composer" class="anchor" href="#composer"><span class="octicon octicon-link"></span></a>Composer</h3>
+<ul>
+<li>Yii 2.0 (dev-master)</li>
+<li>PHP 5.4</li>
+</ul><blockquote>
+<p>Note:
+This extension mandatorily requires <a href="https://github.com/yiisoft/yii2">Yii Framework 2</a>.
+The framework is under active development and the first stable release of Yii 2 is expected in early 2014.</p>
+</blockquote>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
 <p>The preferred way to install this extension is through <a href="http://getcomposer.org/">Composer</a>.</p>
 
@@ -55,14 +64,7 @@ Basically, Y2CV executes the rules set in the param <code>if</code> and if there
 
 <p><code>"kop/yii2-conditional-validator": "dev-master"</code></p>
 
-<p>to the require section of your composer.json</p>
-
-<h3>
-<a name="manual-installation" class="anchor" href="#manual-installation"><span class="octicon octicon-link"></span></a>Manual installation</h3>
-
-<p>Download latest version in <a href="https://github.com/kop/yii2-conditional-validator/zipball/master">zip</a>
-or <a href="https://github.com/kop/yii2-conditional-validator/tarball/master">tar.gz</a> archive,
-extract <code>ConditionalValidator.php</code> file to the place you like and adjust class namespace, to let Yii autoload it.</p>
+<p>to the <code>require</code> section of your <code>composer.json</code> file.</p>
 
 <h2>
 <a name="syntax-example" class="anchor" href="#syntax-example"><span class="octicon octicon-link"></span></a>Syntax Example</h2>
@@ -148,6 +150,25 @@ Errors in the rules set in the param <code>if</code> are discarded after checkin
     <span class="p">];</span>
 <span class="p">}</span>
 </pre></div>
+
+<h2>
+<a name="report" class="anchor" href="#report"><span class="octicon octicon-link"></span></a>Report</h2>
+
+<ul>
+<li>Report any issues <a href="https://github.com/kop/yii2-conditional-validator/issues">on the GitHub</a>.</li>
+</ul><h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p><strong>yii2-conditional-validator</strong> is released under the MIT License. See the bundled <code>LICENSE.md</code> for details.</p>
+
+<h2>
+<a name="resources" class="anchor" href="#resources"><span class="octicon octicon-link"></span></a>Resources</h2>
+
+<ul>
+<li><a href="http://kop.github.io/yii2-conditional-validator">Project Page</a></li>
+<li><a href="https://packagist.org/packages/kop/yii2-conditional-validator">Packagist Package</a></li>
+<li><a href="https://github.com/kop/yii2-conditional-validator">Source Code</a></li>
+</ul>
       </section>
     </div>
 
