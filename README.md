@@ -1,11 +1,14 @@
 Yii2 Conditional Validator
 ==========================
 
+> Extension Deprecated:
+Since version `2.0.0-beta`, [Yii2 has it's own conditional validator](http://www.yiiframework.com/doc-2.0/guide-model.html#conditional-validation) built in to the core.
+Please use validator provided by the framework. This extension will no receive updates any longer.
+
 Yii2 Conditional Validator (Y2CV) validates some attributes depending on certain conditions (rules).
 You can use any core validator as you usually would do or any other class based or inline validator.
 An interesting feature is that you can even use the own Y2CV inside itself to perform more complex conditions.
 Basically, Y2CV executes the rules set in the param `if` and if there are no errors executes the rules set in the param `then`.
-
 
 ## Requirements
 
