@@ -2,9 +2,9 @@
 <html>
 
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Yii2-conditional-validator : If-then validation rules on Yii2 Framework using core validators" />
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Yii2-conditional-validator : If-then validation rules on Yii2 Framework using core validators">
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
@@ -49,13 +49,9 @@ Basically, Y2CV executes the rules set in the param <code>if</code> and if there
 <a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
 
 <ul>
-<li>Yii 2.0 (dev-master)</li>
+<li>Yii 2.0</li>
 <li>PHP 5.4</li>
-</ul><blockquote>
-<p>Note:
-This extension mandatorily requires <a href="https://github.com/yiisoft/yii2">Yii Framework 2</a>.
-The framework is under active development and the first stable release of Yii 2 is expected in early 2014.</p>
-</blockquote>
+</ul>
 
 <h2>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
@@ -96,7 +92,9 @@ The framework is under active development and the first stable release of Yii 2 
 <code>if</code>: (bidimensional array) The conditional rules to be validated. <em>Only</em> if they are all valid (i.e., have no errors) then the rules in <code>then</code> will be validated;</li>
 <li>
 <code>then</code>: (bidimensional array) The rules that will be validated <em>only</em> if there are no errors in rules of <code>if</code> param.</li>
-</ul><blockquote>
+</ul>
+
+<blockquote>
 <p>Note:
 Errors in the rules set in the param <code>if</code> are discarded after checking. Only errors in the rules set in param <code>then</code> are really kept.</p>
 </blockquote>
@@ -162,7 +160,9 @@ Errors in the rules set in the param <code>if</code> are discarded after checkin
 
 <ul>
 <li>Report any issues <a href="https://github.com/kop/yii2-conditional-validator/issues">on the GitHub</a>.</li>
-</ul><h2>
+</ul>
+
+<h2>
 <a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p><strong>yii2-conditional-validator</strong> is released under the MIT License. See the bundled <code>LICENSE.md</code> for details.</p>
