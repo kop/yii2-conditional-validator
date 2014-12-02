@@ -32,11 +32,11 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
         <h1>
-<a name="yii2-conditional-validator" class="anchor" href="#yii2-conditional-validator"><span class="octicon octicon-link"></span></a>Yii2 Conditional Validator</h1>
+<a id="yii2-conditional-validator" class="anchor" href="#yii2-conditional-validator" aria-hidden="true"><span class="octicon octicon-link"></span></a>Yii2 Conditional Validator</h1>
 
 <blockquote>
 <p>Note:
-Since version <code>2.0.0-beta</code>, <a href="http://www.yiiframework.com/doc-2.0/guide-model.html#conditional-validation">Yii2 has it's own conditional validator</a> built in to the core.
+Since version <code>2.0.0-beta</code>, <a href="http://www.yiiframework.com/doc-2.0/guide-input-validation.html#conditional-validation">Yii2 has it's own conditional validator</a> built in to the core.
 Please use validator provided by the framework. This extension <strong>will no receive updates any longer</strong>.</p>
 </blockquote>
 
@@ -46,7 +46,7 @@ An interesting feature is that you can even use the own Y2CV inside itself to pe
 Basically, Y2CV executes the rules set in the param <code>if</code> and if there are no errors executes the rules set in the param <code>then</code>.</p>
 
 <h2>
-<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h2>
 
 <ul>
 <li>Yii 2.0</li>
@@ -54,7 +54,7 @@ Basically, Y2CV executes the rules set in the param <code>if</code> and if there
 </ul>
 
 <h2>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
 
 <p>The preferred way to install this extension is through <a href="http://getcomposer.org/">Composer</a>.</p>
 
@@ -69,19 +69,18 @@ Basically, Y2CV executes the rules set in the param <code>if</code> and if there
 <p>to the <code>require</code> section of your <code>composer.json</code> file.</p>
 
 <h2>
-<a name="syntax-example" class="anchor" href="#syntax-example"><span class="octicon octicon-link"></span></a>Syntax Example</h2>
+<a id="syntax-example" class="anchor" href="#syntax-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Syntax Example</h2>
 
-<div class="highlight highlight-php"><pre><span class="p">[[</span><span class="s1">'safeAttributes'</span><span class="p">],</span> <span class="sb">`path.to.ConditionalValidator`</span><span class="p">,</span>
-    <span class="s1">'if'</span> <span class="o">=&gt;</span> <span class="p">[</span>
-        <span class="c1">// rule1: [['attrX', 'attrY'], 'required', ... ]</span>
-        <span class="c1">// ruleN: ...</span>
-    <span class="p">],</span>
-    <span class="s1">'then'</span> <span class="o">=&gt;</span> <span class="p">[</span>
-        <span class="c1">// rule1: [['attrZ', 'attrG'], 'required', ... ]</span>
-        <span class="c1">// ruleN: ...</span>
-    <span class="p">]</span>
-<span class="p">]</span>
-</pre></div>
+<div class="highlight highlight-php"><pre><span class="pl-s2">[[<span class="pl-s1"><span class="pl-pds">'</span>safeAttributes<span class="pl-pds">'</span></span>], <span class="pl-s1"><span class="pl-pds">`</span>path.to.ConditionalValidator<span class="pl-pds">`</span></span>,</span>
+<span class="pl-s2">    <span class="pl-s1"><span class="pl-pds">'</span>if<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s2">        <span class="pl-c">// rule1: [['attrX', 'attrY'], 'required', ... ]</span></span>
+<span class="pl-s2">        <span class="pl-c">// ruleN: ...</span></span>
+<span class="pl-s2">    ],</span>
+<span class="pl-s2">    <span class="pl-s1"><span class="pl-pds">'</span>then<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s2">        <span class="pl-c">// rule1: [['attrZ', 'attrG'], 'required', ... ]</span></span>
+<span class="pl-s2">        <span class="pl-c">// ruleN: ...</span></span>
+<span class="pl-s2">    ]</span>
+<span class="pl-s2">]</span></pre></div>
 
 <ul>
 <li>
@@ -100,75 +99,65 @@ Errors in the rules set in the param <code>if</code> are discarded after checkin
 </blockquote>
 
 <h2>
-<a name="usage-examples" class="anchor" href="#usage-examples"><span class="octicon octicon-link"></span></a>Usage Examples</h2>
+<a id="usage-examples" class="anchor" href="#usage-examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage Examples</h2>
 
 <p><code>If</code> <em>customer_type</em> is "active" <code>then</code> <em>birthdate</em> and <em>city</em> are <code>required</code>:</p>
 
-<div class="highlight highlight-php"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">rules</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="k">return</span> <span class="p">[</span>
-        <span class="p">[[</span><span class="s1">'customer_type'</span><span class="p">],</span> <span class="nx">ConditionalValidator</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span>
-            <span class="s1">'if'</span> <span class="o">=&gt;</span> <span class="p">[</span>
-                <span class="p">[[</span><span class="s1">'customer_type'</span><span class="p">],</span> <span class="s1">'compare'</span><span class="p">,</span> <span class="s1">'compareValue'</span> <span class="o">=&gt;</span> <span class="s1">'active'</span><span class="p">]</span>
-            <span class="p">],</span>
-            <span class="s1">'then'</span> <span class="o">=&gt;</span> <span class="p">[</span>
-                <span class="p">[[</span><span class="s1">'birthdate'</span><span class="p">,</span> <span class="s1">'city'</span><span class="p">],</span> <span class="s1">'required'</span><span class="p">]</span>
-            <span class="p">]</span>
-        <span class="p">]</span>
-    <span class="p">];</span>
-<span class="p">}</span>
-</pre></div>
+<div class="highlight highlight-php"><pre><span class="pl-s2"><span class="pl-s">public</span> <span class="pl-st">function</span> <span class="pl-en">rules</span>()</span>
+<span class="pl-s2">{</span>
+<span class="pl-s2">    <span class="pl-k">return</span> [</span>
+<span class="pl-s2">        [[<span class="pl-s1"><span class="pl-pds">'</span>customer_type<span class="pl-pds">'</span></span>], <span class="pl-s3">ConditionalValidator</span><span class="pl-k">::</span>className(),</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>if<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s2">                [[<span class="pl-s1"><span class="pl-pds">'</span>customer_type<span class="pl-pds">'</span></span>], <span class="pl-s1"><span class="pl-pds">'</span>compare<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>compareValue<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>active<span class="pl-pds">'</span></span>]</span>
+<span class="pl-s2">            ],</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>then<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s2">                [[<span class="pl-s1"><span class="pl-pds">'</span>birthdate<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>city<span class="pl-pds">'</span></span>], <span class="pl-s1"><span class="pl-pds">'</span>required<span class="pl-pds">'</span></span>]</span>
+<span class="pl-s2">            ]</span>
+<span class="pl-s2">        ]</span>
+<span class="pl-s2">    ];</span>
+<span class="pl-s2">}</span></pre></div>
 
 <p><code>If</code> <em>customer_type</em> is "inactive" <code>then</code> <em>birthdate</em> and <em>city</em> are <code>required</code> <strong>and</strong> <em>city</em> must be "sao_paulo", "sumare" or "jacarezinho":</p>
 
-<div class="highlight highlight-php"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">rules</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="k">return</span> <span class="p">[</span>
-        <span class="p">[[</span><span class="s1">'customer_type'</span><span class="p">],</span> <span class="nx">ConditionalValidator</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span>
-            <span class="s1">'if'</span> <span class="o">=&gt;</span> <span class="p">[</span>
-                <span class="p">[[</span><span class="s1">'customer_type'</span><span class="p">],</span> <span class="s1">'compare'</span><span class="p">,</span> <span class="s1">'compareValue'</span> <span class="o">=&gt;</span> <span class="s1">'active'</span><span class="p">]</span>
-            <span class="p">),</span>
-            <span class="s1">'then'</span> <span class="o">=&gt;</span> <span class="p">[</span>
-                <span class="p">[[</span><span class="s1">'birthdate'</span><span class="p">,</span> <span class="s1">'city'</span><span class="p">],</span> <span class="s1">'required'</span><span class="p">],</span>
-                <span class="p">[[</span><span class="s1">'city'</span><span class="p">],</span> <span class="s1">'in'</span><span class="p">,</span> <span class="s1">'range'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'sao_paulo'</span><span class="p">,</span> <span class="s1">'sumare'</span><span class="p">,</span> <span class="s1">'jacarezinho'</span><span class="p">]]</span>
-            <span class="p">]</span>
-        <span class="p">]</span>
-    <span class="p">];</span>
-<span class="p">}</span>
-</pre></div>
+<div class="highlight highlight-php"><pre><span class="pl-s2"><span class="pl-s">public</span> <span class="pl-st">function</span> <span class="pl-en">rules</span>()</span>
+<span class="pl-s2">{</span>
+<span class="pl-s2">    <span class="pl-k">return</span> [</span>
+<span class="pl-s2">        [[<span class="pl-s1"><span class="pl-pds">'</span>customer_type<span class="pl-pds">'</span></span>], <span class="pl-s3">ConditionalValidator</span><span class="pl-k">::</span>className(),</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>if<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s2">                [[<span class="pl-s1"><span class="pl-pds">'</span>customer_type<span class="pl-pds">'</span></span>], <span class="pl-s1"><span class="pl-pds">'</span>compare<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>compareValue<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>active<span class="pl-pds">'</span></span>]</span>
+<span class="pl-s2">            ),</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>then<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s2">                [[<span class="pl-s1"><span class="pl-pds">'</span>birthdate<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>city<span class="pl-pds">'</span></span>], <span class="pl-s1"><span class="pl-pds">'</span>required<span class="pl-pds">'</span></span>],</span>
+<span class="pl-s2">                [[<span class="pl-s1"><span class="pl-pds">'</span>city<span class="pl-pds">'</span></span>], <span class="pl-s1"><span class="pl-pds">'</span>in<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>range<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [<span class="pl-s1"><span class="pl-pds">'</span>sao_paulo<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>sumare<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>jacarezinho<span class="pl-pds">'</span></span>]]</span>
+<span class="pl-s2">            ]</span>
+<span class="pl-s2">        ]</span>
+<span class="pl-s2">    ];</span>
+<span class="pl-s2">}</span></pre></div>
 
 <p><code>If</code> <em>information</em> starts with 'http://' <strong>and</strong> has at least 24 chars length <code>then</code> the own <em>information</em> must be a valid url:</p>
 
-<div class="highlight highlight-php"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">rules</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="k">return</span> <span class="p">[</span>
-        <span class="p">[[</span><span class="s1">'information'</span><span class="p">],</span> <span class="nx">ConditionalValidator</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span>
-            <span class="s1">'if'</span> <span class="o">=&gt;</span> <span class="p">[</span>
-                <span class="p">[[</span><span class="s1">'information'</span><span class="p">],</span> <span class="s1">'match'</span><span class="p">,</span> <span class="s1">'pattern'</span> <span class="o">=&gt;</span> <span class="s1">'/^http:\/\//'</span><span class="p">],</span>
-                <span class="p">[[</span><span class="s1">'information'</span><span class="p">],</span> <span class="s1">'string'</span><span class="p">,</span> <span class="s1">'min'</span> <span class="o">=&gt;</span> <span class="mi">24</span><span class="p">,</span> <span class="s1">'allowEmpty'</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">]</span>
-            <span class="p">),</span>
-            <span class="s1">'then'</span> <span class="o">=&gt;</span> <span class="p">[</span>
-                <span class="p">[[</span><span class="s1">'information'</span><span class="p">],</span> <span class="s1">'url'</span><span class="p">]</span>
-            <span class="p">]</span>
-        <span class="p">]</span>
-    <span class="p">];</span>
-<span class="p">}</span>
-</pre></div>
+<div class="highlight highlight-php"><pre><span class="pl-s2"><span class="pl-s">public</span> <span class="pl-st">function</span> <span class="pl-en">rules</span>()</span>
+<span class="pl-s2">{</span>
+<span class="pl-s2">    <span class="pl-k">return</span> [</span>
+<span class="pl-s2">        [[<span class="pl-s1"><span class="pl-pds">'</span>information<span class="pl-pds">'</span></span>], <span class="pl-s3">ConditionalValidator</span><span class="pl-k">::</span>className(),</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>if<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s2">                [[<span class="pl-s1"><span class="pl-pds">'</span>information<span class="pl-pds">'</span></span>], <span class="pl-s1"><span class="pl-pds">'</span>match<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>pattern<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-sr"><span class="pl-pds">'/</span><span class="pl-k">^</span>http:\/\/<span class="pl-pds">/'</span></span>],</span>
+<span class="pl-s2">                [[<span class="pl-s1"><span class="pl-pds">'</span>information<span class="pl-pds">'</span></span>], <span class="pl-s1"><span class="pl-pds">'</span>string<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>min<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">24</span>, <span class="pl-s1"><span class="pl-pds">'</span>allowEmpty<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">false</span>]</span>
+<span class="pl-s2">            ),</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>then<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s2">                [[<span class="pl-s1"><span class="pl-pds">'</span>information<span class="pl-pds">'</span></span>], <span class="pl-s1"><span class="pl-pds">'</span>url<span class="pl-pds">'</span></span>]</span>
+<span class="pl-s2">            ]</span>
+<span class="pl-s2">        ]</span>
+<span class="pl-s2">    ];</span>
+<span class="pl-s2">}</span></pre></div>
 
 <h2>
-<a name="report" class="anchor" href="#report"><span class="octicon octicon-link"></span></a>Report</h2>
-
-<ul>
-<li>Report any issues <a href="https://github.com/kop/yii2-conditional-validator/issues">on the GitHub</a>.</li>
-</ul>
-
-<h2>
-<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p><strong>yii2-conditional-validator</strong> is released under the MIT License. See the bundled <code>LICENSE.md</code> for details.</p>
 
 <h2>
-<a name="resources" class="anchor" href="#resources"><span class="octicon octicon-link"></span></a>Resources</h2>
+<a id="resources" class="anchor" href="#resources" aria-hidden="true"><span class="octicon octicon-link"></span></a>Resources</h2>
 
 <ul>
 <li><a href="http://kop.github.io/yii2-conditional-validator">Project Page</a></li>
